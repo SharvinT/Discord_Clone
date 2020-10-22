@@ -66,3 +66,18 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### `Building a Discord Clone Project Using MERN stack`
+
+-> In this project, I am using the React Redux for developing the Discord.
+-> For the Front-end part, I'm using React Js for building the functional components for Sidebar, Chat Header, Chat body, Chat Input sections.
+-> And for the Icons I'm using the Material UI Icons.
+-> Then for the Back-end part of it, I'm using NodeJs including the powerful ExpressJs and serverless database MongoDb.
+
+### `Steps for building Discord`
+
+1. Setting up the React Environment using the above commands.
+2. Building the Sidebar.
+3. Building the Chat section.
+4. Configuring the NodeJs, Express and Mongoose.
+5. Deploying the Back-end (NodeJS) in Heroku and Front-end in Firebase.
