@@ -1,19 +1,20 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
-### `Building a Discord Clone Project Using MERN stack`
+### `Building a Discord Clone Using MERN stack`
 
 -> In this project, I am using the React Redux for developing the Discord.<br />
 -> For the Front-end part, I'm using React Js for building the functional components for Sidebar, Chat Header, Chat body, Chat Input sections.<br />
 -> And for the Icons I'm using the Material UI Icons.<br />
--> Then for the Back-end part of it, I'm using NodeJs including the powerful ExpressJs and serverless database MongoDb.
+-> Then for the Back-end part, initially using the Firebase for Authenticating and for cloud storage.<br />
+-> Then later I'm using NodeJs including the powerful ExpressJs and serverless database MongoDb.
 
-### `Steps for building Discord`
+### `Steps for building Discord (front-end) `
 
-1. Setting up the React Environment using the above commands.
+1. Set-up the React Environment using the below commands.
 2. Building the Sidebar.
 3. Building the Chat section.
-4. Configuring the NodeJs, Express and Mongoose.
-5. Deploying the Back-end (NodeJS) in Heroku and Front-end in Firebase.
+4. Configuring the Firebase for Authentication and for cloud storage.
+5. After completing the development, deploy it in the Firebase.
 
 ## Available Scripts
 
