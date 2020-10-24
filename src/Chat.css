@@ -3,7 +3,9 @@
   flex-direction: column;
   flex: 0.75;
   background-color: #363a3f;
+  overflow: scroll;
   height: 100vh;
+  padding-top: 60px;
 }
 .chat__input {
   display: flex;
@@ -12,9 +14,16 @@
   align-items: center;
   padding: 15px;
   border-radius: 5px;
-  margin: 20px;
+  margin: 0 20px;
   border-top: 1px solid gray;
   background-color: #474b53;
+  width: 71%;
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+}
+::-webkit-scrollbar {
+  display: none;
 }
 .chat__input > form > input {
   padding: 15px;
@@ -36,4 +45,5 @@
 }
 .chat__messages {
   flex: 1;
+  padding-bottom: 70px;
 }

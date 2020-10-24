@@ -70,4 +70,8 @@
 }
 .sidebar__profileIcons > .MuiSvgIcon-root {
   padding: 10px;
+  cursor: pointer;
+}
+.sidebar__profileIcons > .MuiSvgIcon-root:hover {
+  color: white;
 }
