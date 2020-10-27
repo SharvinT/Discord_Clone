@@ -8,13 +8,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 -> Then for the Back-end part, initially using the Firebase for Authenticating and for cloud storage.<br />
 -> Then later I'm using NodeJs including the powerful ExpressJs and serverless database MongoDb.
 
-### `Steps for building Discord (front-end) `
+### `Steps for building Discord (front-end)`
 
 1. Set-up the React Environment using the below commands.
 2. Building the Sidebar.
 3. Building the Chat section.
 4. Configuring the Firebase for Authentication and for cloud storage.
 5. After completing the development, deploy it in the Firebase.
+6. Then implementing the Back-end using the Node js with Express js and MongoDB.
+7. Hosing the backend(Node js) in Heroku and Entire project in firebase hosing.
 
 ## Available Scripts
 
