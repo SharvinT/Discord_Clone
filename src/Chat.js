@@ -13,6 +13,12 @@ import { selectUser } from "./features/userSlice";
 import db from "./firebase";
 import Message from "./Message";
 import firebase from "firebase";
+import axios from "./axios";
+import Pusher from "pusher-js";
+
+const pusher = new Pusher("c8712fa6f2e7ca43a458", {
+  cluster: "ap2",
+});
 
 function Chat() {
   const user = useSelector(selectUser);
@@ -20,23 +26,44 @@ function Chat() {
   const channelName = useSelector(selectChannelName);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
-  useEffect(() => {
+
+  const getConversation = (channelId) => {
     if (channelId) {
-      db.collection("channels")
-        .doc(channelId)
-        .collection("messages")
-        .orderBy("timestamp", "asc")
-        .onSnapshot((snapshot) =>
-          setMessages(snapshot.docs.map((doc) => doc.data()))
-        );
+      axios.get(`/get/conversation?id=${channelId}`).then((res) => {
+        setMessages(res.data[0].conversation);
+      });
     }
+  };
+
+  useEffect(() => {
+    // if (channelId) {
+    //   db.collection("channels")
+    //     .doc(channelId)
+    //     .collection("messages")
+    //     .orderBy("timestamp", "asc")
+    //     .onSnapshot((snapshot) =>
+    //       setMessages(snapshot.docs.map((doc) => doc.data()))
+    //     );
+    // }
+    if (channelId) {
+      getConversation(channelId);
+    }
+    const channel = pusher.subscribe("conversation");
+    channel.bind("newMessage", function (data) {
+      getConversation(channelId);
+    });
   }, [channelId]);
 
   const sendMessage = (e) => {
     e.preventDefault();
-    db.collection("channels").doc(channelId).collection("messages").add({
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    // db.collection("channels").doc(channelId).collection("messages").add({
+    //   timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    //   message: input,
+    //   user: user,
+    // });
+    axios.post(`/new/message?id=${channelId}`, {
       message: input,
+      timestamp: Date.now(),
       user: user,
     });
     setInput("");

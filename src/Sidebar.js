@@ -16,25 +16,49 @@ import { Avatar } from "@material-ui/core";
 import { selectUser } from "./features/userSlice";
 import { useSelector } from "react-redux";
 import db, { auth } from "./firebase";
+import axios from "./axios";
+import Pusher from "pusher-js";
+
+const pusher = new Pusher("c8712fa6f2e7ca43a458", {
+  cluster: "ap2",
+});
 
 function Sidebar() {
   const user = useSelector(selectUser);
   const [channels, setChannels] = useState([]);
 
+  const getChannels = () => {
+    axios.get("/get/channelList").then((res) => {
+      setChannels(res.data);
+    });
+  };
+
   useEffect(() => {
-    db.collection("channels").onSnapshot((snapshot) =>
-      setChannels(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          channel: doc.data(),
-        }))
-      )
-    );
+    // db.collection("channels").onSnapshot((snapshot) =>
+    //   setChannels(
+    //     snapshot.docs.map((doc) => ({
+    //       id: doc.id,
+    //       channel: doc.data(),
+    //     }))
+    //   )
+    // );
+    getChannels();
+
+    const channel = pusher.subscribe("channels");
+    channel.bind("newChannel", function (data) {
+      getChannels();
+    });
   }, []);
-  const handleAddChannel = () => {
+  const handleAddChannel = (e) => {
+    e.preventDefault();
     const channelName = prompt("Enter a new channel name");
+    // if (channelName) {
+    //   db.collection("channels").add({
+    //     channelName: channelName,
+    //   });
+    // }
     if (channelName) {
-      db.collection("channels").add({
+      axios.post("/new/channel", {
         channelName: channelName,
       });
     }
@@ -55,12 +79,8 @@ function Sidebar() {
           <AddIcon onClick={handleAddChannel} className="sidebar__addChannel" />
         </div>
         <div className="sidebar__channelsList">
-          {channels.map(({ id, channel }) => (
-            <SidebarChannel
-              key={id}
-              id={id}
-              channelName={channel.channelName}
-            />
+          {channels.map(({ id, name }) => (
+            <SidebarChannel key={id} id={id} channelName={name} />
           ))}
         </div>
       </div>

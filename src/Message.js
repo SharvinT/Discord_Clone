@@ -8,8 +8,11 @@ function Message({ timestamp, message, user }) {
       <div className="message__info">
         <h4>
           {user.displayName}
-          <span className="message__timestamp">
+          {/* <span className="message__timestamp">
             {new Date(timestamp?.toDate()).toUTCString()}
+          </span> */}
+          <span className="message__timestamp">
+            {new Date(parseInt(timestamp)).toDateString()}
           </span>
         </h4>
         <p>{message}</p>
